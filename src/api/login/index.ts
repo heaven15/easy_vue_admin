@@ -6,7 +6,7 @@ import request from '/@/utils/request';
  */
 export function login(params: object){
 	return request({
-		url: '/api/v1/system/login',
+		url: '/v1/admin/auth/login',
 		method: 'post',
 		data: params,
 	});

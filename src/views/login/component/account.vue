@@ -32,13 +32,13 @@
         </template>
       </el-input>
     </el-form-item>
-    <el-form-item class="login-animation3" prop="verifyCode">
+    <el-form-item class="login-animation3" prop="verify_code">
       <el-col :span="15">
         <el-input
             type="text"
             maxlength="4"
             :placeholder="$t('message.account.accountPlaceholder3')"
-            v-model="ruleForm.verifyCode"
+            v-model="ruleForm.verify_code"
             clearable
             autocomplete="off"
             @keyup.enter="onSignIn"
@@ -105,10 +105,10 @@ export default defineComponent({
 		const state = reactive({
 			isShowPassword: false,
 			ruleForm: {
-        username: 'demo',
+        username: 'admin',
 				password: '123456',
-        verifyCode: '',
-        verifyKey:''
+        verify_code: '',
+        verify_key:''
 			},
       formRules:{
         username: [
@@ -117,7 +117,7 @@ export default defineComponent({
         password: [
           { required: true, trigger: "blur", message: "密码不能为空" }
         ],
-        verifyCode: [{ required: true, trigger: "blur", message: "验证码不能为空" }]
+        verify_code: [{ required: true, trigger: "blur", message: "验证码不能为空" }]
       },
 			loading: {
 				signIn: false,
@@ -129,9 +129,8 @@ export default defineComponent({
     });
     const getCaptcha = () => {
       captcha().then((res:any)=>{
-        state.captchaSrc = res.data.Base64_image
-        console.log(res.data.Base64_image)
-        state.ruleForm.verifyKey = res.data.key
+        state.captchaSrc = res.data.base64_image
+        state.ruleForm.verify_key = res.data.captcha_id
       })
     };
 		// 时间获取

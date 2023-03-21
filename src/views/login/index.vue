@@ -10,20 +10,9 @@
             </div>
           </div>
           <div v-if="!isScan">
-            <el-tabs v-model="tabsActiveName">
-              <el-tab-pane :label="$t('message.label.one1')" name="account">
-                <Account />
-              </el-tab-pane>
-              <el-tab-pane :label="$t('message.label.two2')" name="mobile">
-                <Mobile />
-              </el-tab-pane>
-            </el-tabs>
+            <Account />
           </div>
           <Scan v-if="isScan" />
-          <div class="login-content-main-sacn" @click="isScan = !isScan">
-            <i class="iconfont" :class="isScan ? 'icon-diannao1' : 'icon-barcode-qr'"></i>
-            <div class="login-content-main-sacn-delta"></div>
-          </div>
         </div>
       </div>
     </div>
@@ -46,8 +35,6 @@ import logoMini from '/@/assets/logo-mini.svg';
 import loginIconTwo from '/@/assets/login-icon-two.svg';
 import { NextLoading } from '/@/utils/loading';
 import Account from '/@/views/login/component/account.vue';
-import Mobile from '/@/views/login/component/mobile.vue';
-import Scan from '/@/views/login/component/scan.vue';
 
 // 定义接口来定义对象的类型
 interface LoginState {
@@ -57,8 +44,9 @@ interface LoginState {
 
 export default defineComponent({
 	name: 'loginIndex',
-	components: { Account, Mobile, Scan },
+	components: { Account},
 	setup() {
+    //清除localStorage localStorage.clear()
 		const storesThemeConfig = useThemeConfig();
 		const { themeConfig } = storeToRefs(storesThemeConfig);
 		const state = reactive<LoginState>({
